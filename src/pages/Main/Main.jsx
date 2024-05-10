@@ -6,20 +6,30 @@ import classes from "./styles.module.css";
 import { useEffect, useState } from "react";
 import { getCategories, getNews } from "../../api/apiNews";
 import Pagination from "../../components/Pagination/Pagination";
+import Search from "../../components/Search/Search";
+import useDebounce from '../../helpers/hooks/useDebounce'
 
 export default function Main() {
     const [news, setNews] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [keywords, setKeywords] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [isLoading, setIsLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const totalPages = 10;
     const pageSize = 10;
 
+    const debouncedKeywords = useDebounce(keywords, 1500)
+
     const fetchNews = async (currentPage) => {
         try {
             setIsLoading(true);
-            const response = await getNews({page_number: currentPage, pageSize, category: selectedCategory === "All" ? null : selectedCategory});
+            const response = await getNews({
+                page_number: currentPage,
+                pageSize,
+                category: selectedCategory === "All" ? null : selectedCategory,
+                keywords: debouncedKeywords
+            });
             setNews(response.news);
             setIsLoading(false);
         } catch (error) {
@@ -36,14 +46,13 @@ export default function Main() {
         }
     };
 
-
     useEffect(() => {
         fetchCategories();
     }, []);
 
     useEffect(() => {
         fetchNews(currentPage);
-    }, [currentPage, selectedCategory]);
+    }, [currentPage, selectedCategory, debouncedKeywords]);
 
     function handleNextPage() {
         if (currentPage < totalPages) setCurrentPage(currentPage + 1);
@@ -59,7 +68,13 @@ export default function Main() {
 
     return (
         <main className={classes.main}>
-            <Categories categories={categories} setSelectedCategory={(currentCategory) => setSelectedCategory(currentCategory)} selectedCategory={selectedCategory} />
+            <Categories
+                categories={categories}
+                setSelectedCategory={(currentCategory) => setSelectedCategory(currentCategory)}
+                selectedCategory={selectedCategory}
+            />
+
+            <Search keywords={keywords} setKeywords={setKeywords}/>
 
             {news.length > 0 && !isLoading ? (
                 <NewsBanner item={news[0]} />
