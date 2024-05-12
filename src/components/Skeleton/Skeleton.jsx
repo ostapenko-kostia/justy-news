@@ -1,10 +1,10 @@
 import classes from "./styles.module.css";
 
-export default function Skeleton({ count = 1, type = "banner" }) {
+export default function Skeleton({ count = 1, type = "banner", direction = "column" }) {
     return (
         <>
             {count > 1 ? (
-                <ul className={classes.list}>
+                <ul className={direction === "column" ? classes.columnList : classes.rowList    }>
                     {[...Array(count)].map((_, index) => (
                         <li
                             key={index}
