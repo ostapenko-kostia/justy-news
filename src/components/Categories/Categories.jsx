@@ -1,12 +1,13 @@
+import { forwardRef } from "react";
 import classes from "./styles.module.css";
 
-export default function Categories({ categories, setSelectedCategory, selectedCategory }) {
+const Categories = forwardRef(({ categories, setSelectedCategory, selectedCategory }, ref) => {
     return (
-        <div className={classes.categories}>
+        <div ref={ref} className={classes.categories}>
             {categories.map((category) => {
                 return (
                     <button
-                    onClick={()=>setSelectedCategory(category)}
+                        onClick={() => setSelectedCategory(category)}
                         className={selectedCategory === category ? classes.active : classes.item}
                         key={category}
                     >
@@ -16,4 +17,8 @@ export default function Categories({ categories, setSelectedCategory, selectedCa
             })}
         </div>
     );
-}
+});
+
+Categories.displayName = "Categories";
+
+export default Categories;
