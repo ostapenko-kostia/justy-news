@@ -7,6 +7,10 @@
 
 @media (max-width: 768px) {
     .main {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+    }
+    .main section:nth-child(1) {
+        height: 400px;
     }
 }
