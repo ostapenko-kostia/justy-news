@@ -6,7 +6,7 @@ export default function App() {
         <>
             <Header></Header>
             <div className="container">
-                <Main></Main>
+                <Main />
             </div>
         </>
     );
