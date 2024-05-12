@@ -1,10 +1,16 @@
 import BannersListWithSkeleton from "../BannersList/BannersList";
 import classes from "./styles.module.css";
 
-export default function LatestNews({ banners, isLoading }) {
+import useFetch from "../../helpers/hooks/useFetch";
+import { getLatestNews } from "../../api/apiNews";
+
+export default function LatestNews() {
+    const { data, isLoading } = useFetch(getLatestNews);
+
     return (
         <section className={classes.section}>
-            <BannersListWithSkeleton banners={banners} isLoading={isLoading} />
+            <h3>Latest News</h3>
+            <BannersListWithSkeleton banners={data && data.news} isLoading={isLoading} />
         </section>
     );
 }
