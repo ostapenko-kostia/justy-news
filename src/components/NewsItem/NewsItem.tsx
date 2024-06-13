@@ -1,7 +1,13 @@
-import formatTimeAgo from "../../helpers/formatTimeAgo";
+import formatTimeAgo from "../../helpers/formatTimeAgo.ts";
 import classes from "./styles.module.css";
 
-export default function NewsItem({ item }) {
+import { INews } from "../../interfaces/index.ts";
+
+interface IProps {
+    item: INews;
+}
+
+export default function NewsItem({ item }: IProps) {
     return (
         <li className={classes.item}>
             <div

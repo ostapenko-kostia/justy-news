@@ -4,7 +4,7 @@ import Main from "./pages/Main/Main";
 export default function App() {
     return (
         <>
-            <Header></Header>
+            <Header />
             <div className="container">
                 <Main />
             </div>

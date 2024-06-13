@@ -1,17 +1,22 @@
 import classes from "./styles.module.css";
 
-import { useRef } from "react";
+import { ReactElement, useRef } from "react";
 import React from "react";
 
-export default function Slider({ children, step= 100 }) {
-    const slider = useRef(null);
+interface IProps {
+    step?: number;
+    children: ReactElement;
+}
+
+export default function Slider({step = 150, children} : IProps) {
+    const slider = useRef<HTMLElement | null>(null);
 
     function scrollLeft() {
-        slider.current.scrollLeft -= step;
+        if(slider && slider.current) slider.current.scrollLeft -= step;
     }
 
     function scrollRight() {
-        slider.current.scrollLeft += step;
+        if(slider && slider.current) slider.current.scrollLeft -= step;
     }
 
     return (
