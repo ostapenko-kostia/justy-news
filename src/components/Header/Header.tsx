@@ -1,4 +1,4 @@
-import formatDate from '../../helpers/formatDate'
+import formatDate from '../../helpers/formatDate.ts'
 import classes from './styles.module.css'
 
 export default function Header() {

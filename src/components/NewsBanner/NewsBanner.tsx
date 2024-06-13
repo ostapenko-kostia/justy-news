@@ -1,8 +1,14 @@
 import Image from "../Image/Image";
-import formatTimeAgo from "../../helpers/formatTimeAgo";
+import formatTimeAgo from "../../helpers/formatTimeAgo.ts";
 import classes from "./styles.module.css";
 
-export default function NewsBanner({ item }) {
+import { INews } from "../../interfaces/index.ts";
+
+interface IProps {
+    item: INews;
+}
+
+export default function NewsBanner({ item }: IProps) {
     return (
         <div className={classes.banner}>
             <Image image={item?.image} />
