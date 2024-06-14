@@ -15,7 +15,7 @@ const useFetch = <T, P>(fetchFunction: IFetchFunction<P, T>, params?: P): IUseFe
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<Error | null>(null);
 
-    const stringParams = params ? new URLSearchParams(params.toString()).toString() : "";
+    const stringParams = params ? new URLSearchParams(params).toString() : "";
 
     useEffect(() => {
         (async () => {
