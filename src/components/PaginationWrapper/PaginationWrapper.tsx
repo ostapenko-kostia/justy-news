@@ -8,7 +8,7 @@ interface IProps extends IPaginationProps {
     children: ReactNode;
 }
 
-export default function PaginationWrapper({ top, bottom, children, ...paginationProps }: IProps) {
+export default function PaginationWrapper({ top, bottom, children, ...paginationProps}: IProps) {
     return (
         <>
             {top && <Pagination {...paginationProps} />}

@@ -9,6 +9,7 @@ import { getCategories } from "../../api/apiNews.ts";
 import Slider from "../Slider/Slider";
 
 import { CategoriesApiResponse, IFilters } from "../../interfaces/index.ts";
+import useTheme from "../../context/ThemeContext.ts";
 
 interface IProps {
     filters: IFilters;
@@ -17,11 +18,12 @@ interface IProps {
 
 export default function NewsFilters({ filters, changeFilters }: IProps) {
     const { data: dataCategories } = useFetch<CategoriesApiResponse, null>(getCategories);
+    const {isDark} = useTheme()
 
     return (
         <div className={classes.filters}>
             {dataCategories ? (
-                <Slider step={100}>
+                <Slider isDark={isDark} step={100}>
                     <Categories
                         categories={["all", ...dataCategories.categories]}
                         setSelectedCategory={(currentCategory) =>

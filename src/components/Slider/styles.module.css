@@ -8,6 +8,16 @@
 .arrow {
     border: none;
     background-color: #fff;
+    border-radius: 20px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 14px;
+}
+
+.dark .arrow {
+    background-color: transparent;
+    color: #fff;
 }

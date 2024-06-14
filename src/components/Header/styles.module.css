@@ -4,6 +4,12 @@
     padding: 12px 24px;
     background-color: white;
     border-bottom: 1px solid #dddddd;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headerWrapper {
+    display: flex;
     flex-direction: column;
     gap: 12px;
 }
@@ -15,4 +21,9 @@
 
 .date {
     font-size: 16px;
+}
+
+.header.dark {
+    background-color: #212121;
+    border-bottom: 1px solid rgb(60, 60, 60);
 }

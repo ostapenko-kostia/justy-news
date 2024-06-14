@@ -24,14 +24,25 @@
     font-size: 18px;
 }
 
+.arrow {
+    padding: 5px;
+    border-radius: 20px;
+}
+
 .pageNumber:active {
     scale: 1.05;
 }
 
 button[disabled] {
     cursor: not-allowed;
+    background-color: #fff;
 }
 
 button[disabled]:active {
     scale: 1;
+}
+
+.dark button {
+    background-color: transparent;
+    color: #fff;
 }
