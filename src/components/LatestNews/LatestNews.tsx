@@ -1,12 +1,10 @@
 import BannersListWithSkeleton from "../BannersList/BannersList";
 import classes from "./styles.module.css";
 
-import useFetch from "../../helpers/hooks/useFetch.ts";
-import { getLatestNews } from "../../api/apiNews.ts";
-import { NewsApiResponse } from "../../interfaces/index.ts";
+import { useGetLatestNewsQuery } from "../../store/services/newsApi.ts";
 
 export default function LatestNews() {
-    const { data, isLoading } = useFetch<NewsApiResponse, null>(getLatestNews);
+    const {data, isLoading } = useGetLatestNewsQuery({})
 
     return (
         <section className={classes.section}>

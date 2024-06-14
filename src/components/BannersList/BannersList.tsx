@@ -9,6 +9,7 @@ interface IProps {
 }
 
 function BannersList({ banners }: IProps) {
+    
     return (
         <ul className={classes.banners}>
             {banners?.map((banner: INews) => {
