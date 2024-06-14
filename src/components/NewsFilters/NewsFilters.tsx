@@ -3,22 +3,19 @@ import classes from "./styles.module.css";
 import Categories from "../../components/Categories/Categories";
 import Search from "../../components/Search/Search";
 
-import useFetch from "../../helpers/hooks/useFetch.ts";
-
-import { getCategories } from "../../api/apiNews.ts";
 import Slider from "../Slider/Slider";
 
-import { CategoriesApiResponse, IFilters } from "../../interfaces/index.ts";
 import useTheme from "../../context/ThemeContext.ts";
+import { useGetCategoriesQuery } from "../../store/services/newsApi.ts";
+import { useAppDispatch, useAppSelector } from "../../store/index.ts";
+import { setFilters } from "../../store/slices/newsSlice.ts";
 
-interface IProps {
-    filters: IFilters;
-    changeFilters: (key: string, value: string | number | null) => void;
-}
+export default function NewsFilters() {
+    const { data: dataCategories } = useGetCategoriesQuery({});
+    const { isDark } = useTheme();
 
-export default function NewsFilters({ filters, changeFilters }: IProps) {
-    const { data: dataCategories } = useFetch<CategoriesApiResponse, null>(getCategories);
-    const {isDark} = useTheme()
+    const filters = useAppSelector((state) => state.news.filters);
+    const dispatch = useAppDispatch();
 
     return (
         <div className={classes.filters}>
@@ -27,7 +24,7 @@ export default function NewsFilters({ filters, changeFilters }: IProps) {
                     <Categories
                         categories={["all", ...dataCategories.categories]}
                         setSelectedCategory={(currentCategory) =>
-                            changeFilters("category", currentCategory)
+                            dispatch(setFilters({ filter: "category", value: currentCategory }))
                         }
                         selectedCategory={filters.category ? filters.category : "all"}
                     />
@@ -36,7 +33,9 @@ export default function NewsFilters({ filters, changeFilters }: IProps) {
 
             <Search
                 keywords={filters.keywords}
-                setKeywords={(keywords) => changeFilters("keywords", keywords)}
+                setKeywords={(keywords) =>
+                    dispatch(setFilters({ filter: "keywords", value: keywords }))
+                }
             />
         </div>
     );

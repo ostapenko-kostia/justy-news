@@ -4,10 +4,9 @@ import Main from "./pages/Main/Main";
 import { ThemeContext } from "./context/ThemeContext";
 
 export default function App() {
-    const [isDark, setIsDark] = useState<boolean>(true);
-
+    const [isDark, setIsDark] = useState<boolean>(false);
     function toggleTheme() {
-        setIsDark((prev)=>!prev)
+        setIsDark((prev) => !prev);
     }
 
     return (
